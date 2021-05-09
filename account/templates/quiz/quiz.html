@@ -242,9 +242,9 @@
 	submitbutton = document.querySelector('#submitquiz')
 	submitbutton.onclick = () => {
 		//localScore = alert(localStorage.getItem('scores'))
-				 
-	  yourscore = 0
-	  listscores = Object.values(localScore)
+		localScore = JSON.parse(localStorage.getItem('scores'))		 
+	  	yourscore = 0
+	 	listscores = Object.values(localScore)
 	  
 	  for(i=0; i < listscores.length; i++){
 	    yourscore += listscores[i]
