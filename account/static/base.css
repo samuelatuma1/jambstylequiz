@@ -1,0 +1,18 @@
+#header {
+  background-color: rgb(123,171,228);
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+}
+#header .logo{
+  color: white;
+  font-size: large;
+}
+body{
+	font-family: Sans-Serif, Arial;
+}
+input {
+  border-radius: 5px;
+  padding-left: 5px;
+  justify-content: center;
+}

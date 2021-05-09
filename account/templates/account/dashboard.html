@@ -1,0 +1,20 @@
+{% extends 'account/base.html' %}
+{% block title %} Dashboard {% endblock %}
+
+{% block contents %}
+	<h1>Dashboard </h1>
+	<p>
+		Welcome to your dashboard.  You can <a href="{% url 'edit' %}">edit your profile</a> or <a href="{% url 'password_change' %}">change your password</a>.
+	</p>
+	
+	 {% with total_images_created=request.user.images_created.count %}
+		<p>Welcome to your dashboard.
+		 You have bookmarked  
+		 {{ total_images_created }}
+		 	 image
+		 {{ total_images_created| pluralize }}.
+		 </p>
+	  {% endwith %} 
+	  
+	
+{% endblock %}

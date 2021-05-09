@@ -1,0 +1,38 @@
+{% extends 'account/base.html' %}
+{% block title %} Your score{% endblock %}
+
+{% block contents %}
+	<style>
+		#performance{
+			color: white;
+			background-color: maroon;
+			width: 95%;
+			margin: auto;
+			border-radius: 2px;
+			padding: 10px;
+			margin-bottom: 10px;
+		}
+		#score{
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			border: 1px solid rgb(123,171,228);
+			color: white;
+			background-color: rgb(123,171,228);
+			display: flex;
+  		  align-items: center;
+			text-align: center;
+			margin: auto;
+			justify-content: center;
+		}
+	</style>
+	<div>
+		<section id='performance' >
+			
+			<p>Hello {{ request.user.username }}, Your score for {{ subject }}</p>
+		</section>
+		<div id='score'>
+			<h1>{{ score }}%</h1>
+		</div>
+	</div>
+{% endblock %}

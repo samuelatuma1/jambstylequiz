@@ -1,0 +1,147 @@
+{% extends 'account/base.html' %}
+{% block title %} Edit profile {% endblock %}
+
+{% block contents %}
+<br/>
+<div class='myprofile'>
+	{% if request.user.profile.photo %}
+		<img src='{{ request.user.profile.photo.url }}' />
+	{% endif %}	
+	<br/>
+	<p>Username: {{ request.user.username }}</p>
+	<p>Email Address: {{ request.user.email }}</p>
+	<p>First name: {{ request.user.first_name }}</p>
+	<style>
+		
+		img{
+			display: block;
+			margin: auto;
+			width: 99%;
+			border-radius: 10px;
+			
+		}
+	</style>
+</div>
+
+<button id='scorebutton'> View scores </button>
+<br/>
+<br/>
+<table class='editscore'>
+		<thead>
+			<tr>
+				<th>Subject</th>
+				<th>Date Taken</th>
+				<th>Score</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			{% for score in request.user.scores.all %}
+			<tr>
+				<td>
+					{{ score.subject }}
+				</td>
+				<td>
+					{{ score.submitted }}
+				</td>
+				<td>
+				{{ score.score }}%
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+		<style>
+			td{
+				width: 33%;
+				text-align: center;
+				 margin-bottom: 5px;
+				 padding: 3px;
+				
+			}
+			tr:nth-child(even){
+				background-color: #f0f8ff;
+				border-radius: 3px;
+				
+			}
+			th{
+				background-color: pink;
+				padding: 3px;
+				border-radius: 3px;
+			}
+			.editscore{
+				display: none;
+			}
+		</style>
+	</table>
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			toggleEditscore = document.querySelector('.editscore')
+			toggleDisplayscore = document.querySelector('#scorebutton')
+			toggleDisplayscore.onclick = () => {
+				if(toggleEditscore.style.display == 'none'){
+					toggleEditscore.style.display = 'block';
+					
+					}
+        else if(toggleEditscore.style.display == 'block'){
+    					toggleEditscore.style.display = 'none';
+    					
+					}
+				
+				else{
+					toggleEditscore.style.display = 'block';
+				}
+				}
+		})
+	</script>
+
+<button id='displaybutton'> Edit Profile </button>
+
+<div class='edit'>
+	<h2>Edit profile </h2>
+	<p>
+		Use the form below to edit your profile
+	</p>
+	<form method="post" enctype='multipart/form-data'>
+		{% csrf_token %}	  
+		{{ user_form.as_p }}
+		{{  profile_form.as_p }}
+		<button>Save Changes</button>
+	</form>
+	<style>
+		#displaybutton, #scorebutton{
+			background-color: maroon;
+			padding: 10px;
+			border-radius: 2px;
+			border: 1px solid maroon;
+			color: white;
+		}
+		
+		.edit{
+			display: none;
+		}
+	</style>
+</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			toggleEdit = document.querySelector('.edit')
+			toggleDisplay = document.querySelector('#displaybutton')
+			toggleDisplay.onclick = () => {
+				if(toggleEdit.style.display == 'none'){
+					toggleEdit.style.display = 'block';
+					
+					}
+        else if(toggleEdit.style.display == 'block'){
+    					toggleEdit.style.display = 'none';
+    					
+					}
+				
+				else{
+					toggleEdit.style.display = 'block';
+				}
+				}
+		})
+	</script>
+	
+{% endblock %}

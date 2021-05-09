@@ -1,0 +1,23 @@
+{% extends 'account/base.html' %}
+{% block title %} Login {% endblock %}
+
+{% block contents %}
+	<h1>Log in </h1>
+	<p>Please, input your log in details</p>
+	<p>Don't have an account <a href='{% url "register" %}'>register here</a></p>
+	
+	{% if form.errors %}
+		<p> Username or password incorrect</p>
+	{% endif %}
+	
+	<form method='POST' action='{% url "login" %}' id='alignForm' enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		
+		<input type='hidden' name='next' value='{{ next }}' />
+		<span><button>Submit</button></span>
+	</form>
+	<p>
+		<a href='{% url "password_reset" %}'><button id='forgot'>Forgot password</button></a>
+	</p>
+{% endblock %}

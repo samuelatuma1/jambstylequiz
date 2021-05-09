@@ -1,0 +1,26 @@
+{% extends 'account/base.html' %}
+{% block title %} Register {% endblock %}
+
+{% block contents %}
+	{% if registered %}
+	
+		<h2> Welcome {{ new_user.first_name }} </h2>
+		<p>Your account has been successfully created</p>
+		<a href='{% url "login" %}'>Log in</a>
+		
+	{% else %}
+		{% if error_msg %}
+			<li style='color: red;'>{{ error_msg }}</li>
+		{% endif %}
+	
+		<h2>Create an account</h2>
+		<p>Sign up with the form below</p>
+		<form method='post' action='{% url "register" %}'>
+			{% csrf_token %}
+			{{ user_form.as_p }}
+			<button>Register</button>
+		</form>
+		
+	{% endif %}
+	
+{% endblock %}

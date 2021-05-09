@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!--  <link rel='stylesheet' href='{% static "base.css" %}'> -->
+  <style>
+  	#header {
+  background-color: rgb(123,171,228);
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+}
+#header .logo{
+  color: white;
+  font-size: large;
+}
+body{
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+input {
+    border-radius: 5px;
+  padding-left: 5px;
+  border: 1px solid grey;
+  
+}
+form{
+	justify-content: center;
+}
+form button, #forgot {
+	padding-left:14px;
+	padding-right: 14px;
+	background-color: rgb(123,171,228);
+	color: white;
+	border-radius: 3px;
+	margin: auto;
+	border: 2px solid rgb(123,171,228);
+	justify-content: center;
+}
+#forgot{
+	background-color: red;
+	border: 4px solid red;
+}
+form span{
+	margin: auto;
+	text-align: center;
+	align-items: center;
+}
+
+
+		nav{
+        display: flex;
+        flex-wrap: wrap;
+     	}
+     	.logo{
+     	  width: 80%;
+     	  padding: 10px;
+     	}
+     	  .menu li,.menu a{
+     	    list-style: none;
+     	    color: white;
+     	    text-align: right;
+     	    text-decoration: none;
+     	    margin: 5px;
+     	  }
+     	  a{
+     	  	color: navy;
+     	  }
+     	  li .selected{
+     	  /*
+     	    color: rgb(123,171,228);
+     	    padding: 6px;
+     	    background-color: white;
+     	    border-radius: 6px;
+     	    margin-top: 6px;
+     	    margin-bottom: 6px;
+     	    */
+     	    border-bottom: 3px solid white;
+     	    padding: 5px;
+     	    padding-bottom: 2px;
+     	    border-radius: 6px;
+     	    color: white;
+     	    margin: 6px;
+     	  }
+     	  nav .burger{
+     	  padding: 10px;
+     	  background-color: white;
+     	  border-radius: 8px;
+     	  }
+     	 .menu{
+     	 	display: none;
+     	 }
+  </style>
+    <title>
+    	{% block title %}{% endblock%}
+    </title>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', () =>{
+        menuBar = document.querySelector('.burger')
+        menuBar.addEventListener('click', () =>{
+          toggle = document.querySelector('.menu')
+          isVisible = toggle.style.display
+          if(isVisible === 'none'){
+            toggle.style.display = 'block';
+          }
+          else if(isVisible === 'block'){
+            toggle.style.display= 'none'
+          }
+          else{
+            toggle.style.display= 'block';
+          }
+        })
+      })
+    </script>
+    
+  </head>
+  
+  <body>
+     <div id="header"> 
+     	<nav>
+     		<section class="logo">Bookmarks</section>
+     		<span class='burger'>&#x2630;</span>
+     	</nav>
+     	{% if request.user.is_authenticated %}
+     		<ul class='menu'>
+     			<li >
+     				<a href='{% url "dashboard" %}' {% if section == 'dashboard' %}class='selected'{% endif %}>My dashhoard</a>
+     			</li>
+     			<li >
+     				<a href='#'  {% if section == 'images' %}class='selected'{% endif %}>Images</a>
+     			</li>
+     				<li >
+     				<a href='#'  {% if section == 'people' %}class='selected'{% endif %}>people</a>
+     			</li>
+     			<li >
+     				<a href='{% url "quizhome" %}' {% if section == 'quiz' %}class='selected'{% endif %}>quiz</a>
+     			</li>
+     			
+     		</ul>
+     	{% endif %}
+     	
+     	
+     </div>   
+     <span class="user"> 
+     		{% if request.user.is_authenticated %}
+     			 Hello {{ request.user.username }}, 
+     			 <a href="{% url 'logout' %}" style='color: grey;'>
+     		 		Logout
+     		 	</a> 
+     		{% else %}
+     			<a href="{% url 'login' %}" style='color: grey;'>Log-in</a> 
+     		{% endif %} 
+     	</span>
+     	
+    
+     	{% block contents %} 
+ 
+     	
+     	{% endblock %}
+     	
+     </div>
+
+  </body>
+</html>
+
+

@@ -1,0 +1,54 @@
+{% extends 'account/base.html' %}
+{% block title %} Dashboard {% endblock %}
+
+{% block contents %}
+	<h2>Posts</h2>
+	<button id='1'>Click</button>
+	<button id='2'>Click</button>
+	<button id='3'>Click</button>
+	
+	<button id='div'>Hello</button>
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+		/*
+			buttons = document.querySelectorAll('button')
+			buttons.forEach(button => {
+				button.onclick = () => {
+						id = button.getAttribute('id')
+						
+						fetch(`/account/post?post=${id}`).then(
+							response => { return response.json() }
+						).then(data => {
+							alert(data.value)
+						})
+				}
+				) */
+				div = document.querySelector('#div')
+				
+				div.onclick = () => {
+					fetch("{% url  'posts' %}", {
+						method: 'POST',
+						headers: {'Content-Type': 'application/json', 
+							/*'csrfmiddlewaretoken': '{{ csrf_token }}' */
+						  },
+						
+						body: JSON.stringify({
+							value : '18'
+						})
+
+					}).then( response => { return response.json() })
+				.then(data => {
+					alert( 'dmdmdm' )
+				})
+				}
+				
+				
+			})
+			
+			
+			
+		})
+	</script>
+	
+{% endblock %}

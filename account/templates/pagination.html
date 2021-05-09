@@ -1,0 +1,26 @@
+<div class='pagination'>
+    <span class='step_links'>
+        {% if page.has_previous %}
+            <a href='?page={{ page.previous_page_number }}' style='display: none;'>{{page.previous_page_number}}</a>
+        {% endif %}
+
+        <span class='current'>
+            Question {{ page.number }} of {{ page.paginator.num_pages }}
+
+        </span>
+
+        {% if page.has_next %}
+            <a href='?page={{ page.next_page_number }}' id='nextQuestion'><button id='nextButton'>NEXT QUESTION</button></a>
+        {% endif %}
+        <style>
+            #nextButton{
+                color: white;
+                background-color: maroon;
+                border: 1px solid maroon;
+                padding: 5px;
+                border-radius: 5px;
+            }
+        </style>
+
+    </span>
+</div>

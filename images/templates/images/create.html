@@ -1,0 +1,26 @@
+{% extends 'account/base.html' %}
+{% block title %} Bookmark image {% endblock %}
+
+{% block content %}
+	<h2>Bookmark an image</h2>   
+	<img src="{{ request.GET.url }}" class="image-preview">   
+	<form method="post">     
+		{{ form.as_p }}     
+		{% csrf_token %}     
+		<input type="submit" value="Bookmark it!">   </form>
+		<style>
+			input[type=submit]{
+				background-color: pink;
+				color: white;
+				border: 1px solid pink;
+				padding: 6px; 
+			}
+			.image-preview{
+				display: block;
+				width: 99%;
+				margin: auto
+				border: 1px solid white;
+				border-radius: 10px;
+			}
+		</style>
+{% endblock %}

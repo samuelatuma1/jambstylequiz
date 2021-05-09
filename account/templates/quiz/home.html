@@ -1,0 +1,24 @@
+{% extends 'account/base.html' %}
+{% block title %} Quiz Home {% endblock %}
+
+{% block contents %}
+	<div>Welcome {{ request.user.username }}</div>
+	<h3>Take a quiz </h3>
+	{% for subject in subjects %}
+		<a href='{% url  "quiz" subject.subject_name %}'>
+			<button class='bigRed'>{{ subject.subject_name  }}</button>
+		</a>
+		<style>
+			.bigRed{
+				width: 100%;
+				padding: 15px;
+				margin-bottom: 10px;
+				color: white;
+				background-color: maroon;
+				border-radius: 6px;
+				border: 1px solid maroon;
+			}
+		</style>
+	{% empty %}
+	{% endfor %}
+{% endblock %}
