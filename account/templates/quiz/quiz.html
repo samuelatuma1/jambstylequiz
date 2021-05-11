@@ -8,6 +8,7 @@
 	<div id='questiondiv'>
 		<style>
 			
+			
 			#invisible{
 				display: None;
 			}
@@ -22,7 +23,7 @@
 			
 			#otherData{
 				box-shadow: 3px 3px 8px 8px rgb(242, 242, 242);
-				width: 30%;
+				/*width: 30%; */
 				padding: 18px;
 				background-color: white;
 				border: 1px solid white;
@@ -36,7 +37,7 @@
         		padding: 10px;
         		background: white;
         		margin-bottom: 15px;
-				width: 55%;
+				/*width: 55%; */
 			}
 			.wrapped{
 				border: 1px solid #f6f5f5;
@@ -63,6 +64,24 @@
 			.questionImg{
 				width: 300px;
 			}
+
+			@media screen and (max-width: 800px){
+				#otherData{
+					width: 99%;
+				}
+				.questiondata{
+					width: 99%;	
+				}
+			}
+			@media screen and (min-width: 800px){
+				#otherData{
+					width: 30%;
+				}
+				.questiondata{
+					width: 55%;	
+				}
+			}
+
 		</style>
 		<br/>
 		
@@ -74,7 +93,10 @@
 				{% if question.image %}
 					<img src='{{ question.image.url }}' class='questionImg'/>
 				{% endif %}
-				<p>{{ question.question }}</p>
+				{% if question.instruction %}
+					<p><strong>{{ question.instruction }}</strong></p>
+				{% endif %}
+				<p>{{ question.question | safe }}</p>
 				<div id='options'>
 					<section data-choice='A' data-at='{{ quiz_questions.number }}' class='answerChoice'>
 						<span class='wrapped'>A</span>

@@ -20,7 +20,8 @@ class Subject(models.Model):
 class Question(models.Model):
 	image = models.ImageField(upload_to='questions/', blank=True)
 	course = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='questions')
-	question = models.CharField(max_length=300)
+	instruction = models.CharField(max_length=250, blank=True)
+	question = models.TextField(max_length=300)
 	optionA = models.CharField(max_length=250)
 	optionB = models.CharField(max_length=250)
 	optionC = models.CharField(max_length=250)
